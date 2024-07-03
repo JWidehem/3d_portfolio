@@ -17,11 +17,13 @@ const Home = () => {
   audioRef.current.loop = true;
   const [isRotating, setIsRotating] = useState(false);
   const [currentStage, setCurrentStage] = useState(1);
-  const [isPlayingMusic, setIsPlayingMusic] = useState(false);
+  const [isPlayingMusic, setIsPlayingMusic] = useState(true);
 
   useEffect(() => {
-    if (!isPlayingMusic) {
+    if (isPlayingMusic) {
       audioRef.current.play();
+    } else {
+      audioRef.current.pause();
     }
 
     return () => {
@@ -103,7 +105,7 @@ const Home = () => {
 
       <div className="absolute bottom-2 left-2">
         <img
-          src={!isPlayingMusic ? soundoff : soundon}
+          src={isPlayingMusic ? soundoff : soundon}
           alt="sound"
           className="w-10 h-10 cursor-pointer object-contain"
           onClick={() => setIsPlayingMusic(!isPlayingMusic)}
